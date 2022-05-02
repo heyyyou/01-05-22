@@ -157,21 +157,13 @@ public class ConsulationController {
 			                                                                 @PathVariable("idPatient") long idPatient   ){
 		Generaliste  generaliste = medecinRepository.findById(idGeneraliste).get(); 
 		Patient patient = patientRepository.findById(idPatient).get() ; 
-		String image1 = null ; 
-		String image2 = null ; 
-		String image3 = null ; 
-		String image4 = null ; 
-		String image5 = null ; 
-		String image6 = null ; 
-		String image7 = null ; 
-		String image8 = null ; 
-		String image9 = null ; 
-		String image10 = null ; 
-		
+		byte[] image1 = null ; 
+		byte[] image2 = null ; 
+	
 		
 		
 
-		Consultation consultation = new Consultation(LocalDate.now(),generaliste, patient,image1,image2,image3,image4,image5,image6,image7,image8,image9,image10);
+		Consultation consultation = new Consultation(LocalDate.now(),generaliste, patient,image1,image2);
 		repository.save(consultation) ;
 		return consultation ; 
 
@@ -188,10 +180,7 @@ public class ConsulationController {
 	public void deleteConsult(@PathVariable("id") long id, @PathVariable("idConsultation") long idConsultation){
 		 Consultation consult =repository.findById(idConsultation).get();
 		 consult.setImage1_Droite(null);
-		 consult.setImage2_Droite(null);
-		 consult.setImage3_Droite(null);
-		 consult.setImage4_Droite(null);
-		 consult.setImage5_Droite(null);
+		
 		 repository.save(consult);
 
 	}
@@ -199,10 +188,7 @@ public class ConsulationController {
 	public void deleteConsultG(@PathVariable("id") long id, @PathVariable("idConsultation") long idConsultation){
 		 Consultation consult =repository.findById(idConsultation).get();
 		 consult.setImage1_Gauche(null);
-		 consult.setImage2_Gauche(null);
-		 consult.setImage3_Gauche(null);
-		 consult.setImage4_Gauche(null);
-		 consult.setImage5_Gauche(null);
+		
 		 repository.save(consult);
 
 	}
@@ -225,24 +211,13 @@ public class ConsulationController {
 	
 	@PutMapping("/addimage1D/{idConsultation}")
 	public String updateImage1D(@PathVariable("idConsultation") long idConsultation  , @RequestParam("image1") MultipartFile image1) throws IOException {
-		updateImage1Droite(idConsultation , image1);
+		service.updateImage1Droite(idConsultation , image1);
 		return "Done pour image1 Droite !!!!" ; 
 		
 	}
-	public void updateImage1Droite(long id , MultipartFile file) throws IOException {
-		
-		 Consultation  consultation = repository.findById(id).get();
-		 StringBuilder fileNames=new StringBuilder();
-		 Path fileNameAndPath=Paths.get(uploadDirectory,file.getOriginalFilename()+"");
-		 fileNames.append(file);
-		 System.out.println("bagraa"+fileNameAndPath);
-		 Files.write(fileNameAndPath, file.getBytes());
-		 consultation.setImage1_Droite(fileNameAndPath.toString());
-		 System.out.println("naaan boukk "+fileNameAndPath.toString());
-		 		repository.save(consultation);
-	}
+	
 
-	@PutMapping("/addimage2D/{idConsultation}")
+/*	@PutMapping("/addimage2D/{idConsultation}")
 	public String updateImage2D(@PathVariable("idConsultation") long idConsultation  , @RequestParam("image2") MultipartFile image2 ) throws IOException {
 			updateImage2Droite(idConsultation,  image2);
 		return "Done pour image2  Droite!!!!" ; 
@@ -316,24 +291,13 @@ public class ConsulationController {
 	
 	@PutMapping("/addimage1G/{idConsultation}")
 	public String updateImage1G(@PathVariable("idConsultation") long idConsultation  , @RequestParam("image1") MultipartFile image1  ) throws IOException {
-	updateImage1Gauche(idConsultation , image1);
+	service.updateImage1Gauche(idConsultation , image1);
 		return "Done pour image1 Gauche !!!!" ; 
 	}
 	
-	public void updateImage1Gauche(long id , MultipartFile file) throws IOException {
-		
-		 Consultation  consultation = repository.findById(id).get();
-		 StringBuilder fileNames=new StringBuilder();
-		 Path fileNameAndPath=Paths.get(uploadDirectory,file.getOriginalFilename()+"");
-		 fileNames.append(file);
-		 System.out.println("bagraa"+fileNameAndPath);
-		 Files.write(fileNameAndPath, file.getBytes());
-		 consultation.setImage1_Gauche(fileNameAndPath.toString());
-		 
-		repository.save(consultation);
-	}
 	
-	@PutMapping("/addimage2G/{idConsultation}")
+	
+	/*@PutMapping("/addimage2G/{idConsultation}")
 	public String updateImage2G(@PathVariable("idConsultation") long idConsultation  , @RequestParam("image2") MultipartFile image2 ) throws IOException {
 		updateImage2Gauche(idConsultation, image2);
 		return "Done pour image2  Gauche!!!!" ; 
@@ -430,7 +394,7 @@ public class ConsulationController {
     return repository.findByPatient_idAndGeneraliste_id(idPatient,id);		 
 		
 	}
-	@GetMapping("/Consultations/{id}/{idConsultation}/{idPatient}")
+	/*@GetMapping("/Consultations/{id}/{idConsultation}/{idPatient}")
 	public ResponseEntity<byte[]> getImage() throws IOException {
 		Consultation conster = repository.findById((long) 1).get();
 
@@ -439,88 +403,26 @@ public class ConsulationController {
 		byte[] imageBytes = StreamUtils.copyToByteArray(imageFile.getInputStream());
 
 		return ResponseEntity.ok().contentType(MediaType.IMAGE_PNG).body(imageBytes);
-    }
+    }*/
 	
 	@GetMapping("/Consultation/{id}/{idConsultation}/{idPatient}")
-	public Consultation getAllProductsbyid(@PathVariable("id") long id,@PathVariable("idConsultation") long idConsultation,@PathVariable("idPatient") long idPatient,HttpServletResponse response){
+	public Consultation getAllProductsbyid(@PathVariable("id") long id,@PathVariable("idConsultation") long idConsultation,@PathVariable("idPatient") long idPatient){
 		Consultation conster = repository.findById(idConsultation).get();
 		 if( conster.getImage1_Droite()== null) {
 			  return conster;
 		  }
-		 else {
-			    conster.setImage1_Droite(conster.getImage1_Droite());
-
-			   
-		 }	
-			    System.out.println( Paths.get(conster.getImage1_Droite()));
+		  else {
+			    conster.setImage1_Droite(service.decompressZLib(conster.getImage1_Droite()));}	
+		 if( conster.getImage1_Gauche()== null) {
+			  return conster;
+		  }
+		  else {
+			    conster.setImage1_Gauche(service.decompressZLib(conster.getImage1_Gauche()));
+			    return conster;
+				  
+				
+			}}
 			    
-			 /*   if( conster.getImage2_Droite()== null) {
-					  return conster;
-				  }
-				  else {
-					    conster.setImage2_Droite(service.decompressZLib(conster.getImage2_Droite()));	}
-		
-					    if( conster.getImage3_Droite()== null) {
-							  return conster;
-						  }
-						  else {
-							    conster.setImage3_Droite(service.decompressZLib(conster.getImage3_Droite()));	}
-				
-							    if( conster.getImage4_Droite()== null) {
-									  return conster;
-								  }
-								  else {
-									    conster.setImage4_Droite(service.decompressZLib(conster.getImage4_Droite()));	}
-									    
-									    if( conster.getImage5_Droite()== null) {
-											  return conster;
-										  }
-										  else {
-											    conster.setImage5_Droite(service.decompressZLib(conster.getImage5_Droite()));}
-									    
-									    
-									    
-									    
-									    
-											    
-											    if( conster.getImage1_Gauche()== null) {
-													  return conster;
-												  }
-												  else {
-													    conster.setImage1_Gauche(service.decompressZLib(conster.getImage1_Gauche()));}
-													    
-													    if( conster.getImage2_Gauche()== null) {
-															  return conster;
-														  }
-														  else {
-															    conster.setImage2_Gauche(service.decompressZLib(conster.getImage2_Gauche()));}
-															    
-															    if( conster.getImage3_Gauche()== null) {
-																	  return conster;
-																  }
-																  else {
-																	    conster.setImage3_Gauche(service.decompressZLib(conster.getImage3_Gauche()));	}
-														
-																	    if( conster.getImage4_Gauche()== null) {
-																			  return conster;
-																		  }
-																		  else {
-																			    conster.setImage4_Gauche(service.decompressZLib(conster.getImage4_Gauche()));	}
-																			    
-																			    if( conster.getImage5_Gauche()== null) {
-																					  return conster;
-																				  }
-																				  else {
-																					    conster.setImage5_Gauche(service.decompressZLib(conster.getImage5_Gauche()));	}
-																		
-																
-		*/										
-										
-				
-		return conster;
-		  
-		
-	}
 	// input id de Auto detection dans consultation
 	
 	
@@ -532,6 +434,7 @@ public class ConsulationController {
 	return	repository.save(consultation);
 		 
 	}
+	
 	/*@PutMapping("/demanderAvis/{idGeneraliste}/{idConsult}")
 	public String udemanderAvisID(@PathVariable("idGeneraliste") long idGeneraliste,@PathVariable("idConsult") long idConsult) {
 	Consultation consultation = repository.findById(idConsult).get();

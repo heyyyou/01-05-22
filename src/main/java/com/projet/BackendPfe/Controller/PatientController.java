@@ -77,7 +77,7 @@ public class PatientController {
 	
 	
 	@GetMapping("/patient/{id}/{cin}")
-	public Patient productById(@PathVariable("cin") long cin, @PathVariable("id") @ModelAttribute("id") long id ){
+	public Patient productById( @PathVariable("id") @ModelAttribute("id") long id,@PathVariable("cin") long cin ){
 		return pr.findById(cin).get();
 	}
 	@DeleteMapping("/deletepatient/{id}/{cin}")

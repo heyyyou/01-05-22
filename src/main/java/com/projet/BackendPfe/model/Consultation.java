@@ -28,46 +28,28 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Consultation {
 
 
- public Consultation(LocalDate dateConsult, Generaliste generaliste, Patient patient, String image1_Droite,
-			String image2_Droite, String image3_Droite, String image4_Droite, String image5_Droite,
-			String image1_Gauche,String image2_Gauche, String image3_Gauche, String image4_Gauche,
-			String image5_Gauche) {
+ public Consultation(LocalDate dateConsult, Generaliste generaliste, Patient patient, byte[] image1_Droite,
+			
+			byte[] image1_Gauche) {
 		super();
 		this.dateConsult = dateConsult;
 		this.generaliste = generaliste;
 		this.patient = patient;
 		this.image1_Droite = image1_Droite;
-		this.image2_Droite = image2_Droite;
-		this.image3_Droite = image3_Droite;
-		this.image4_Droite = image4_Droite;
-		this.image5_Droite = image5_Droite;
+		
 		this.image1_Gauche = image1_Gauche;
-		this.image2_Gauche = image2_Gauche;
-		this.image3_Gauche = image3_Gauche;
-		this.image4_Gauche = image4_Gauche;
-		this.image5_Gauche = image5_Gauche;
+		
 	}
 private int demandeAvisD;
  private int demandeAvisG;
 	public Consultation( int demandeAvisD,int demandeAvisG,LocalDate dateConsult, Generaliste generaliste, Patient patient,
-			AutoDetection autoDetection, String image1_Droite, String image2_Droite, String image3_Droite,
-			String image4_Droite, String image5_Droite, String image1_Gauche, String image2_Gauche,
-			String image3_Gauche, String image4_Gauche, String image5_Gauche) {
+			AutoDetection autoDetection, byte[] image1_Droite, byte[] image1_Gauche) {
 		super();
 		this.dateConsult = dateConsult;
 		this.generaliste = generaliste;
 		this.patient = patient;
 		this.autoDetection = autoDetection;
 		this.image1_Droite = image1_Droite;
-		this.image2_Droite = image2_Droite;
-		this.image3_Droite = image3_Droite;
-		this.image4_Droite = image4_Droite;
-		this.image5_Droite = image5_Droite;
-		this.image1_Gauche = image1_Gauche;
-		this.image2_Gauche = image2_Gauche;
-		this.image3_Gauche = image3_Gauche;
-		this.image4_Gauche = image4_Gauche;
-		this.image5_Gauche = image5_Gauche;
 		this.demandeAvisD=demandeAvisD;
 		this.demandeAvisG=demandeAvisG;
 	}
@@ -131,108 +113,40 @@ private LocalDate dateConsult;
 	protected AutoDetection autoDetection;
 	
 	@Column(name = "image1Droite", length = 1000000)
-	  protected String image1_Droite;
-	  @Column(name = "image2Droite", length = 1000000)
-	  protected String image2_Droite;
-	@Column(name = "image3Droite", length = 1000000)
-	  protected String image3_Droite;
-	@Column(name = "image4Droite", length = 1000000)
-	  protected String image4_Droite;
-	@Column(name = "image5Droite", length = 1000000)
-	  protected String image5_Droite;
+	  protected byte[] image1_Droite;
+	 
 	@Column(name = "image1Gauche", length = 1000000)
-	  protected String image1_Gauche;
-	  @Column(name = "image2Gauche", length = 1000000)
-	  protected String image2_Gauche;
-		@Column(name = "image3Gauche", length = 1000000)
-		  protected String image3_Gauche;
-		@Column(name = "image4Gauche", length = 1000000)
-		  protected String image4_Gauche;
-		@Column(name = "image5Gauche", length = 1000000)
-		  protected String image5_Gauche;
-
-	public String getImage1_Droite() {
+	  protected byte[] image1_Gauche;
+	 
+	public byte[] getImage1_Droite() {
 		return image1_Droite;
 	}
-	public void setImage1_Droite(String image1_Droite) {
+	public void setImage1_Droite(byte[] image1_Droite) {
 		this.image1_Droite = image1_Droite;
 	}
-	public String getImage2_Droite() {
-		return image2_Droite;
-	}
-	public void setImage2_Droite(String image2_Droite) {
-		this.image2_Droite = image2_Droite;
-	}
-	public String getImage3_Droite() {
-		return image3_Droite;
-	}
-	public void setImage3_Droite(String image3_Droite) {
-		this.image3_Droite = image3_Droite;
-	}
-	public String getImage4_Droite() {
-		return image4_Droite;
-	}
-	public void setImage4_Droite(String image4_Droite) {
-		this.image4_Droite = image4_Droite;
-	}
-	public String getImage5_Droite() {
-		return image5_Droite;
-	}
-	public void setImage5_Droite(String image5_Droite) {
-		this.image5_Droite = image5_Droite;
-	}
-	public String getImage1_Gauche() {
+	
+	public byte[] getImage1_Gauche() {
 		return image1_Gauche;
 	}
-	public void setImage1_Gauche(String image1_Gauche) {
+	public void setImage1_Gauche(byte[] image1_Gauche) {
 		this.image1_Gauche = image1_Gauche;
 	}
-	public String getImage2_Gauche() {
-		return image2_Gauche;
-	}
-	public void setImage2_Gauche(String image2_Gauche) {
-		this.image2_Gauche = image2_Gauche;
-	}
-	public String getImage3_Gauche() {
-		return image3_Gauche;
-	}
-	public void setImage3_Gauche(String image3_Gauche) {
-		this.image3_Gauche = image3_Gauche;
-	}
-	public String getImage4_Gauche() {
-		return image4_Gauche;
-	}
-	public void setImage4_Gauche(String image4_Gauche) {
-		this.image4_Gauche = image4_Gauche;
-	}
-	public String getImage5_Gauche() {
-		return image5_Gauche;
-	}
-	public void setImage5_Gauche(String image5_Gauche) {
-		this.image5_Gauche = image5_Gauche;
-	}
-
+	
 
 	
 public Consultation() {}
 
 
 public Consultation(Generaliste generaliste,Patient patient,LocalDate dateConsult,
-		String image1_Gauche , String image2_Gauche , String image3_Gauche ,String image4_Gauche , String image5_Gauche,String image1_Droite , String image2_Droite , String image3_Droite , String image4_Droite , String image5_Droite) {
+		byte[] image1_Gauche ,byte[] image1_Droite) {
 	super();
 	this.generaliste = generaliste;
 	this.patient = patient;
 
 	this.image1_Gauche=image1_Gauche ; 
-	this.image2_Gauche=image2_Gauche ; 
-	this.image3_Gauche=image3_Gauche ; 
-	this.image4_Gauche=image4_Gauche;
-	this.image5_Gauche=image5_Gauche ; 
+	
 	this.image1_Droite=image1_Droite ; 
-	this.image2_Droite=image2_Droite ; 
-	this.image3_Droite=image3_Droite ; 
-	this.image4_Droite=image4_Droite;
-	this.image5_Droite=image5_Droite ; 
+	
 	this. dateConsult=dateConsult;
 }
 

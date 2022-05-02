@@ -15,12 +15,12 @@ import com.projet.BackendPfe.repository.ConsultationRepository;
 public class ConsultationService {
 @Autowired ConsultationRepository repository ; 
 /******************Oeil Droite *******************/
-	/*public void updateImage1Droite(long id , MultipartFile file) throws IOException {
+	public void updateImage1Droite(long id , MultipartFile file) throws IOException {
 		 Consultation  consultation = repository.findById(id).get();
 		 consultation.setImage1_Droite(compressZLib(file.getBytes()));
-		repository.save(consultation);
+		repository.save(consultation);}
 	
-	public void updateImage2Droite(long id , MultipartFile file) throws IOException {
+	/*public void updateImage2Droite(long id , MultipartFile file) throws IOException {
 		 Consultation  consultation = repository.findById(id).get();
 		 consultation.setImage2_Droite(compressZLib(file.getBytes()));
 		repository.save(consultation);
@@ -38,14 +38,15 @@ public class ConsultationService {
 		 consultation.setImage5_Droite(compressZLib(file.getBytes()));
 		repository.save(consultation);
 	}
-	}*/
+*/
 	
 	/******************* Oeil Gauche ******************/
-	/*public void updateImage1Gauche(long id ,MultipartFile file) throws IOException {
+	public void updateImage1Gauche(long id ,MultipartFile file) throws IOException {
 		 Consultation  consultation = repository.findById(id).get();
 		 consultation.setImage1_Gauche(compressZLib(file.getBytes()));
 		repository.save(consultation);
 	}
+	/*
 	public void updateImage2Gauche(long id, MultipartFile file) throws IOException {
 		 Consultation  consultation = repository.findById(id).get();
 		 consultation.setImage2_Gauche(compressZLib(file.getBytes()));
@@ -63,7 +64,7 @@ public class ConsultationService {
 		 Consultation  consultation = repository.findById(id).get();
 		 consultation.setImage5_Gauche(compressZLib(file.getBytes()));
 		repository.save(consultation);
-	}
+	}*/
 	public static byte[] compressZLib(byte[] data) {
 		Deflater deflater = new Deflater();
 		deflater.setInput(data);
@@ -83,7 +84,7 @@ public class ConsultationService {
 
 		return outputStream.toByteArray();
 	}
-*/
+
 	// uncompress the image bytes before returning it to the angular application
 	public static byte[] decompressZLib(byte[] data) {
 		Inflater inflater = new Inflater();
